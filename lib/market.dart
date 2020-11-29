@@ -1,11 +1,18 @@
+import 'package:banzhuan/symbol.dart';
+
 class Market {
   // get coins
   String name;
   String base;
+  List<Symbol> symbols;
 
-  Market(this.name, this.base) {}
+  Market(this.name) {}
 
-  Future refreshCoins() {}
+  Future refreshSymbols() {}
 
-  Future refreshSymbol(Symbol symbol) {}
+  Future depth(Symbol symbol) {}
+
+  String nickname() {
+    return name;
+  }
 }

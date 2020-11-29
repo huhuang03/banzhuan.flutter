@@ -1,0 +1,8 @@
+* LINKS
+https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md
+
+https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api_CN.md
+
+* why request binance failed??
+- fix get*
+- maybe proxy or client??

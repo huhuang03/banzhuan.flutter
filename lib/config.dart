@@ -1,0 +1,2 @@
+const SYMBOL_TIMEOUT = 2 * 60 * 1000;
+const DEPTH_TIMEOUT = 1 * 30 * 1000;

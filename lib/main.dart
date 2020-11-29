@@ -1,3 +1,5 @@
+import 'package:banzhuan/bian.dart';
+import 'package:banzhuan/chajia.dart';
 import 'package:banzhuan/market.dart';
 import 'package:flutter/material.dart';
 
@@ -49,11 +51,18 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
-  final Market bian = Market("bian", "https://api.binance.com");
-  final Market huobi = Market("huobi", "");
+  final Market bian = Bian();
+  final Market huobi = Market("huobi");
+  Chajia chajiaHuobiToBian;
+
+  _MyHomePageState() {
+    chajiaHuobiToBian = Chajia(bian, bian);
+    chajiaHuobiToBian.refresh();
+  }
 
   void _refresh() {
-    bian.refreshCoins().then((value) => huobi.refreshCoins());
+    chajiaHuobiToBian.refresh();
+    // bian.refreshCoins().then((value) => huobi.refreshCoins());
     // .then((value) => null)
   }
 

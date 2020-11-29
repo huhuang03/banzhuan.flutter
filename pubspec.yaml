@@ -24,6 +24,14 @@ dependencies:
   flutter:
     sdk: flutter
 
+  json_annotation: ^3.1.1
+
+  thyi:
+    path: ../duomai/flutter/thyi.flutter/thyi
+  # thyi:
+  #   git:
+  #     url: git@gitlab.duomai.cn:flutter/thyi.flutter.git
+  #     path: thyi
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -32,6 +40,23 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  json_serializable: ^3.5.0
+  # thyi_generator:
+  #   git:
+  #     url: git@gitlab.duomai.cn:flutter/thyi.flutter.git
+  #     path: thyi_generator
+  thyi_generator:
+    path: ../duomai/flutter/thyi.flutter/thyi_generator
+  build_runner:
+
+
+dependencies_overrides:
+  thyi:
+    path: ../duomai/flutter/thyi.flutter/thyi
+
+  thyi_generator:
+    path: ../duomai/flutter/thyi.flutter/thyi_generator
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
