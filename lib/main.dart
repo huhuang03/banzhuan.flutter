@@ -1,9 +1,27 @@
+import 'dart:io';
+
 import 'package:banzhuan/bian.dart';
 import 'package:banzhuan/chajia.dart';
+import 'package:banzhuan/ds/ds_bian.dart';
 import 'package:banzhuan/market.dart';
+import 'package:banzhuan/page/page_setting/page_settings.dart';
 import 'package:flutter/material.dart';
+import 'package:dio/adapter.dart';
+import 'package:get_storage/get_storage.dart';
 
-void main() {
+void main() async {
+  await GetStorage.init();
+
+  (thyi.dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+      (HttpClient client) {
+    client.findProxy = (uri) {
+      //proxy all request to localhost:8888
+      return "PROXY 127.0.0.1:1080";
+    };
+    client.badCertificateCallback =
+        (X509Certificate cert, String host, int port) => true;
+  };
+
   runApp(MyApp());
 }
 
@@ -75,6 +93,25 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            DrawerHeader(
+              child: Text(
+                'Main Page'
+              ),
+            ),
+            ListTile(
+              title: Text("Settings"),
+              onTap: () {
+                Navigator.pop(context);
+                // Go Setting Page
+                Navigator.push(context, MaterialPageRoute(builder: (_) => PageSettings()));
+              },
+            )
+          ],
+        ),
+      ),
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.

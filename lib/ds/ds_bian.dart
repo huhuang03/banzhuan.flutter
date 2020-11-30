@@ -9,4 +9,17 @@ abstract class BianApi {
   Future<ExchangeInfo> exchangeInfo();
 }
 
-var bianApi = BianApi$thyiImpl(Thyi(BIAN_BASE_URL, persisCookie: false));
+class CommonIntercept extends Interceptor {
+  @override
+  Future onRequest(RequestOptions options) async {
+    options.headers["user-agent"] =
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36";
+    return options;
+  }
+}
+var thyi = Thyi(BIAN_BASE_URL, persisCookie: false)
+  ..interceptors.add(CommonIntercept())
+  ..dio.httpClientAdapter;
+
+
+var bianApi = BianApi$thyiImpl(thyi);

@@ -48,6 +48,7 @@ dev_dependencies:
   thyi_generator:
     path: ../duomai/flutter/thyi.flutter/thyi_generator
   build_runner:
+  get_storage:
 
 
 dependencies_overrides:

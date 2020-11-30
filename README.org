@@ -4,5 +4,5 @@ https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-a
 https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api_CN.md
 
 * why request binance failed??
-- fix get*
 - maybe proxy or client??
+- because it doesn't follow system wide proxy.
