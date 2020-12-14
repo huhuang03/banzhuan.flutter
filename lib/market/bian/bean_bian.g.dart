@@ -6,31 +6,33 @@ part of 'bean_bian.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-BaNetSymbol _$BaNetSymbolFromJson(Map<String, dynamic> json) {
-  return BaNetSymbol(
+BianSymbol _$BianSymbolFromJson(Map<String, dynamic> json) {
+  return BianSymbol(
     json['symbol'] as String,
     json['baseAsset'] as String,
     json['quoteAsset'] as String,
+    json['status'] as String,
   );
 }
 
-Map<String, dynamic> _$BaNetSymbolToJson(BaNetSymbol instance) =>
+Map<String, dynamic> _$BianSymbolToJson(BianSymbol instance) =>
     <String, dynamic>{
       'symbol': instance.symbol,
       'baseAsset': instance.baseAsset,
       'quoteAsset': instance.quoteAsset,
+      'status': instance.status,
     };
 
-ExchangeInfo _$ExchangeInfoFromJson(Map<String, dynamic> json) {
-  return ExchangeInfo(
+BianExchangeInfo _$BianExchangeInfoFromJson(Map<String, dynamic> json) {
+  return BianExchangeInfo(
     (json['symbols'] as List)
         ?.map((e) =>
-            e == null ? null : BaNetSymbol.fromJson(e as Map<String, dynamic>))
+            e == null ? null : BianSymbol.fromJson(e as Map<String, dynamic>))
         ?.toList(),
   );
 }
 
-Map<String, dynamic> _$ExchangeInfoToJson(ExchangeInfo instance) =>
+Map<String, dynamic> _$BianExchangeInfoToJson(BianExchangeInfo instance) =>
     <String, dynamic>{
       'symbols': instance.symbols,
     };

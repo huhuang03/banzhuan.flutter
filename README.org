@@ -1,8 +1,17 @@
 * LINKS
-https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md
+[[https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md][bian rest-api]]
 
 https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api_CN.md
+
+https://huobiapi.github.io/docs/spot/v1/cn/#185368440e
+
+https://api.binance.com/api/v3/exchangeInfo
 
 * why request binance failed??
 - maybe proxy or client??
 - because it doesn't follow system wide proxy.
+
+
+
+* Note
+** why symbol invalide

@@ -355,7 +355,7 @@ packages:
     source: hosted
     version: "1.9.3"
   path:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: path
       url: "https://pub.dartlang.org"
@@ -485,6 +485,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.8.0-nullsafety.4"
+  sqflite:
+    dependency: "direct main"
+    description:
+      name: sqflite
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.3.2+1"
+  sqflite_common:
+    dependency: transitive
+    description:
+      name: sqflite_common
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.2+1"
   stack_trace:
     dependency: transitive
     description:
@@ -513,6 +527,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.0-nullsafety.3"
+  synchronized:
+    dependency: transitive
+    description:
+      name: synchronized
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.2.0+2"
   term_glyph:
     dependency: transitive
     description:
@@ -537,12 +558,10 @@ packages:
   thyi_annotation:
     dependency: transitive
     description:
-      path: thyi_annotation
-      ref: HEAD
-      resolved-ref: acbd979c39f114235fbdaad65f0e6fd3daaa2313
-      url: "git@192.168.1.208:flutter/thyi.flutter.git"
-    source: git
-    version: "0.0.2"
+      name: thyi_annotation
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.3"
   thyi_generator:
     dependency: "direct dev"
     description:
@@ -608,4 +627,4 @@ packages:
     version: "2.2.1"
 sdks:
   dart: ">=2.12.0-0.0 <3.0.0"
-  flutter: ">=1.12.13+hotfix.5 <2.0.0"
+  flutter: ">=1.22.2 <2.0.0"

@@ -1,7 +1,26 @@
 class Coin {
   String name = "unknown";
+  Coin(this.name);
 
-  Coin(this.name) {}
+  String get fixName {
+    return name.toLowerCase();
+  }
 
-  void fixName() {}
+  @override
+  String toString() {
+    return 'Coin{name: $fixName}';
+  }
+
+  bool get isBtc {
+    return "btc" == fixName;
+  }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+          other is Coin && runtimeType == other.runtimeType && fixName == other.fixName;
+
+  @override
+  int get hashCode => fixName.hashCode;
+
 }

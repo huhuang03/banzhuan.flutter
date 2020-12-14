@@ -1,5 +1,6 @@
-import 'package:banzhuan/page/page_setting/dialog_set_proxy.dart';
 import 'package:flutter/material.dart';
+
+import 'dialog_set_proxy.dart';
 
 class PageSettings extends StatelessWidget {
 
