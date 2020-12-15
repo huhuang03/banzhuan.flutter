@@ -39,7 +39,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   _MyHomePageState() {
     huobi.name = "huobi";
-    chajiaHuobiToBian = ChajiaCalculator(bian, huobi);
+    // chajiaHuobiToBian = ChajiaCalculator(bian, huobi);
+    chajiaHuobiToBian = ChajiaCalculator(huobi, bian);
   }
 
   void _refresh() {

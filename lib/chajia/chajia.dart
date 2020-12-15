@@ -1,4 +1,5 @@
 import 'package:banzhuan/coin.dart';
+import 'package:banzhuan/depth.dart';
 import 'package:banzhuan/symbol.dart';
 
 import '../market/market.dart';
@@ -103,6 +104,9 @@ class ChajiaItem {
   Market toMarket;
   double chajia = -10000;
 
+  DepthCalcResult buy;
+  DepthCalcResult sell;
+
   ChajiaItem(this.fromMarket, this.toMarket, this.fromSymbol, this.toSymbol);
 
   bool hasDepth() {
@@ -112,11 +116,9 @@ class ChajiaItem {
   void calcChajia() {
     if (this.hasDepth()) {
       var money = 0.1;
-      var buys = fromSymbol.depth.canBuy(money: money).amount;
-      print("can buy: $buys");
-      var sells = toSymbol.depth.canSell(amount: buys);
-      this.chajia = sells.amount - money;
-      print("sells: ${sells.amount}");
+      buy = fromSymbol.depth.canBuy(money: money);
+      sell = toSymbol.depth.canSell(amount: buy.amount);
+      this.chajia = sell.amount - money;
     }
   }
 
