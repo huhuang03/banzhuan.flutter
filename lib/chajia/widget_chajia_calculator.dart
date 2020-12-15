@@ -100,8 +100,6 @@ class WidgetChajiaCalculator extends StatefulWidget {
 }
 
 class _WidgetChajiaCalculatorState extends State<WidgetChajiaCalculator> {
-  Chajia chajia;
-
   ChajiaCalculatorValue get value => widget.controller.value;
 
   @override
@@ -130,7 +128,7 @@ class _WidgetChajiaCalculatorState extends State<WidgetChajiaCalculator> {
                 ),
               ],
             ),
-            this.chajia != null ? WidgetChajia(chajia) : Text("未计算到差价")
+            value.chajia != null ? WidgetChajia(value.chajia) : Text("未计算到差价")
           ],
         );
       },

@@ -41,7 +41,7 @@ abstract class Market {
         .then((value) {
           symbol.setDepth(value);
           return value;
-        });
+        }).catchError((onError) => symbol.setDepth(null));
   }
 
   String nickname() {
