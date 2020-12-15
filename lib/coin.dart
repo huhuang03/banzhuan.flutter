@@ -1,5 +1,12 @@
 class Coin {
   String name = "unknown";
+  bool hasGetStates = false;
+  // 是否可冲币
+  bool canDeposit = false;
+
+  // 是否可提币
+  bool canWithDraw = false;
+
   Coin(this.name);
 
   String get fixName {

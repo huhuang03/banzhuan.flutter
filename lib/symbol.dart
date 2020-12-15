@@ -1,4 +1,5 @@
 import 'package:banzhuan/coin.dart';
+import 'package:banzhuan/config.dart';
 import 'package:banzhuan/depth.dart';
 import 'package:banzhuan/market/bian/bean_bian.dart';
 import 'package:banzhuan/market/huobi/huobi_symbol.dart';
@@ -8,7 +9,17 @@ class Symbol {
   Coin quoteCoin;
   String symbol;
 
+  int depthSetTime = 0;
   Depth depth;
+
+  bool isDepthValidate() {
+    return this.depth != null && (DateTime.now().millisecondsSinceEpoch - this.depthSetTime) < DEPTH_CACHE_TIME;
+  }
+
+  void setDepth(Depth depth) {
+    this.depth = depth;
+    this.depthSetTime = DateTime.now().millisecondsSinceEpoch;
+  }
 
   Symbol(this.baseCoin, this.quoteCoin, this.symbol); // Symbol(this.baseCoin, this.quoteCoin);
 

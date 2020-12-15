@@ -12,6 +12,7 @@ class WidgetChajia extends StatefulWidget {
 }
 
 class _WidgetChajiaState extends State<WidgetChajia> {
+  static const TAKE_LEN = 5;
 
   Widget buildChajiaItem(BuildContext context) {
     // sort
@@ -23,10 +24,12 @@ class _WidgetChajiaState extends State<WidgetChajia> {
       }
       return 1;
     });
+    var items = widget.chajia.items.take(TAKE_LEN).toList();
+
     return ListView.builder(
       shrinkWrap: true,
-      itemCount: widget.chajia.items.length,
-      itemBuilder: (_, index) => WidgetChajiaItem(widget.chajia.items[index]));
+      itemCount: items.length,
+      itemBuilder: (_, index) => WidgetChajiaItem(items[index]));
   }
 
   @override

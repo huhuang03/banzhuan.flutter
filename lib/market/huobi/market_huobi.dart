@@ -22,10 +22,11 @@ class MarketHuobi extends Market {
   }
 
   @override
-  Future<Depth> refreshDepth(Symbol symbol) {
+  Future<Depth> refreshDepthInner(Symbol symbol) {
     return houbiApi.depth(symbol.symbol).then((huobiDepth) {
       symbol.depth = Depth.fromHuobiDepth(huobiDepth.tick);
       return symbol.depth;
     });
   }
+
 }
