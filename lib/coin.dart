@@ -1,4 +1,6 @@
 class Coin {
+  static var nameMap = {"bcc": "bch"};
+
   String name = "unknown";
   bool hasGetStates = false;
   // 是否可冲币
@@ -7,7 +9,12 @@ class Coin {
   // 是否可提币
   bool canWithDraw = false;
 
-  Coin(this.name);
+  Coin(String name) {
+    if (nameMap.containsKey(name)) {
+      name = nameMap[name];
+    }
+    this.name = name;
+  }
 
   factory Coin.canWidthDrawAndDeposit(String name) {
     return Coin(name)

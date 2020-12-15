@@ -25,6 +25,7 @@ Map<String, dynamic> _$HuobiCurrencyNetToJson(HuobiCurrencyNet instance) =>
 
 HuobiCurrency _$HuobiCurrencyFromJson(Map<String, dynamic> json) {
   return HuobiCurrency(
+    json['currency'] as String,
     (json['chains'] as List)
         ?.map((e) =>
             e == null ? null : HuobiChain.fromJson(e as Map<String, dynamic>))
@@ -34,6 +35,7 @@ HuobiCurrency _$HuobiCurrencyFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> _$HuobiCurrencyToJson(HuobiCurrency instance) =>
     <String, dynamic>{
+      'currency': instance.currency,
       'chains': instance.chains,
     };
 

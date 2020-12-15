@@ -16,9 +16,19 @@ class HuobiCurrencyNet {
 
 @JsonSerializable()
 class HuobiCurrency {
+  String currency;
+
   List<HuobiChain> chains;
 
-  HuobiCurrency(this.chains);
+  List<HuobiChain> getChains() {
+    if (this.chains == null || this.chains.length == 0) {
+      return [HuobiChain(currency, "deny", "deny")];
+    } else {
+      return chains;
+    }
+  }
+
+  HuobiCurrency(this.currency, this.chains);
 
   factory HuobiCurrency.fromJson(Map<String, dynamic> json) => _$HuobiCurrencyFromJson(json);
   Map<String, dynamic> toJson() => _$HuobiCurrencyToJson(this);
@@ -34,7 +44,11 @@ class HuobiChain {
   HuobiChain(this.chain, this.depositStatus, this.withdrawStatus);
 
   Coin toCoin() {
-    return Coin(chain)
+    var name = chain;
+    if (chain.endsWith("1")) {
+      name = chain.substring(0, chain.length - 1);
+    }
+    return Coin(name)
     ..canDeposit = canDeposit
     ..canDeposit = canWithdraw;
   }

@@ -10,7 +10,7 @@ class MarketHuobi extends Market {
   @override
   Future<List<Symbol>> refreshSymbols() {
     return houbiApi.currencies().then((value) => value.data)
-        .then((value) => value.map((e) => e.chains).toList())
+        .then((value) => value.map((e) => e.getChains()).toList())
     // List<List<Chain>>
         .then((value) => value.map((e) => e.map((e) => e.toCoin()).toList()).toList())
         .then((value) => value.expand((element) => element).toList())
