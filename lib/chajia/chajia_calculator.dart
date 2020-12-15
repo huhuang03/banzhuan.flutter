@@ -5,7 +5,6 @@ class ChajiaCalculator {
   Market fromMarket;
   Market toMarket;
   bool isRefreshing = false;
-  List<ChajiaItem> items = [];
 
   ChajiaCalculator(this.fromMarket, this.toMarket);
 

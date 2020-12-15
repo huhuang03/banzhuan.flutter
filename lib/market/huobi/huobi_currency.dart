@@ -50,7 +50,7 @@ class HuobiChain {
     }
     return Coin(name)
     ..canDeposit = canDeposit
-    ..canDeposit = canWithdraw;
+    ..canWithDraw = canWithdraw;
   }
 
   bool get canDeposit => depositStatus == ALLOWED;
