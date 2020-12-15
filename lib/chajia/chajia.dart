@@ -28,22 +28,23 @@ class Chajia {
     this.fromMarket.symbols.forEach((fromSymbol) {
       if (fromSymbol.isBtc) {
         Coin baseCoin = fromSymbol.baseCoin;
-        if (this.fromMarket.canWithDraw(baseCoin) && this.toMarket.canDeposit(baseCoin)) {
-          this.toMarket.symbols.forEach((toSymbol) {
-            if (fromSymbol == toSymbol) {
+        this.toMarket.symbols.forEach((toSymbol) {
+          if (fromSymbol == toSymbol) {
+            print("check baseCoin: ${baseCoin.name}");
+            if (this.fromMarket.canWithDraw(baseCoin) && this.toMarket.canDeposit(baseCoin)) {
               sameSymbols.add(ChajiaItem(fromMarket, toMarket, fromSymbol, toSymbol));
+            } else {
+              var msg = baseCoin.name;
+              if (!this.fromMarket.canWithDraw(baseCoin)) {
+                msg += " 在${this.fromMarket.name}(From) 无法提币";
+              }
+              if (!this.toMarket.canDeposit(baseCoin)) {
+                msg += " 在${this.toMarket.name}(To) 无法冲币";
+              }
+              print(msg);
             }
-          });
-        } else {
-          var msg = baseCoin.name;
-          if (!this.fromMarket.canWithDraw(baseCoin)) {
-            msg += " 在${this.fromMarket.name}(From) 无法提币";
           }
-          if (!this.toMarket.canDeposit(baseCoin)) {
-            msg += " 在${this.toMarket.name}(From) 无法冲币";
-          }
-          print(msg);
-        }
+        });
       }
     });
     return sameSymbols;
@@ -60,7 +61,7 @@ class Chajia {
         })
         .then((value) {
           print('to Market ${toMarket.name} symbols length: ${toMarket.symbols.length}');
-          print('to market ${toMarket.name} symbols: ${toMarket.symbols}');
+          // print('to market ${toMarket.name} symbols: ${toMarket.symbols}');
           callback.onToMarketSymbolGet(toMarket.symbols);
           return getCalcChajiaItems();
         })

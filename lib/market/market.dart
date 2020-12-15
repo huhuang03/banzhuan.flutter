@@ -6,13 +6,13 @@ abstract class Market {
   // get coins
   String name;
   String base;
-  List<Symbol> symbols;
-  List<Coin> coins;
+  List<Symbol> symbols = [];
+  List<Coin> coins = [];
 
   Market(this.name);
 
   Coin findCoin(Coin coin) {
-    var find = coins.firstWhere((element) => element == coin);
+    var find = coins.firstWhere((element) => element == coin, orElse: () => null);
     if (find == null) {
       throw UnsupportedError("在${this.name}里找不到${coin.name}");
     }
@@ -20,11 +20,13 @@ abstract class Market {
   }
 
   bool canDeposit(Coin coin) {
-    return findCoin(coin).canDeposit;
+    print("canDeposit: ${coin.name}");
+    return findCoin(coin)?.canDeposit ?? false;
   }
 
   bool canWithDraw(Coin coin) {
-    return findCoin(coin).canWithDraw;
+    print("canWithDraw: ${coin.name}");
+    return findCoin(coin)?.canWithDraw ?? false;
   }
 
   Future<List<Symbol>> refreshSymbols();

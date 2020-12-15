@@ -1,4 +1,3 @@
-import 'package:banzhuan/coin.dart';
 import 'package:banzhuan/depth.dart';
 import 'package:banzhuan/market/bian/api_bian.dart';
 import 'package:banzhuan/market/market.dart';
