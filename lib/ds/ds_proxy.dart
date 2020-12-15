@@ -27,5 +27,5 @@ String getProxyHost() {
 }
 
 bool hasProxy() {
-  return getProxyHost().isNotEmpty;
+  return getProxyHost()?.isNotEmpty ?? false;
 }

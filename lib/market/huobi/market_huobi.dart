@@ -8,17 +8,24 @@ class MarketHuobi extends Market {
 
   @override
   Future<List<Symbol>> refreshSymbols() {
-    return houbiApi.symbols()
-    .then((value) => value.data)
-    .then((symbols) =>
-        symbols
-            .where((s) => s.isOnline)
-            .map((s) => Symbol.fromHuobi(s))
-            .toList())
-    .then((symbols) {
-      this.symbols = symbols;
-      return symbols;
-    });
+    return houbiApi.currencies().then((value) => value.data)
+        .then((value) => value.map((e) => e.chains).toList())
+    // List<List<Chain>>
+        .then((value) => value.map((e) => e.map((e) => e.toCoin()).toList()).toList())
+        .then((value) => value.expand((element) => element).toList())
+    // List<List<Coin>>
+        .then((value) => this.coins = value)
+        .then((value) => houbiApi.symbols())
+        .then((value) => value.data)
+        .then((symbols) =>
+            symbols
+                .where((s) => s.isOnline)
+                .map((s) => Symbol.fromHuobi(s))
+                .toList())
+        .then((symbols) {
+          this.symbols = symbols;
+          return symbols;
+        });
   }
 
   @override

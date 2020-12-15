@@ -7,11 +7,5 @@ https://huobiapi.github.io/docs/spot/v1/cn/#185368440e
 
 https://api.binance.com/api/v3/exchangeInfo
 
-* why request binance failed??
-- maybe proxy or client??
-- because it doesn't follow system wide proxy.
-
-
-
-* Note
-** why symbol invalide
+* TODOS
+- why some chajia is -0.1?
