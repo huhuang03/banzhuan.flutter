@@ -1,14 +1,13 @@
 import 'package:banzhuan/chajia/chajia.dart';
 import 'package:banzhuan/chajia/chajia_calculator.dart';
 import 'package:banzhuan/chajia/widget_chajia.dart';
+import 'package:banzhuan/chajia/widget_chajia_calculator.dart';
 import 'package:banzhuan/market/bian/market_bian.dart';
 import 'package:banzhuan/market/huobi/market_huobi.dart';
 import 'package:banzhuan/market/market.dart';
 import 'package:banzhuan/page/setting/page_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:path/path.dart';
-import 'package:thyi/thyi.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -31,51 +30,24 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final Market bian = MarketBian();
   final Market huobi = MarketHuobi();
-  ChajiaCalculator chajiaHuobiToBian;
-  String chajiaStateText = "未获取";
+  ChajiaCalculator chajia1;
+  WidgetChajiaCalculatorController chajia1Controller = WidgetChajiaCalculatorController();
+
+  ChajiaCalculator chajia2;
+  WidgetChajiaCalculatorController chajia2Controller = WidgetChajiaCalculatorController();
+
   String stateText = 'IDLE';
   Color stateColor;
-  Chajia chajia;
 
   _MyHomePageState() {
     huobi.name = "huobi";
-    // chajiaHuobiToBian = ChajiaCalculator(bian, huobi);
-    chajiaHuobiToBian = ChajiaCalculator(huobi, bian);
+    chajia1 = ChajiaCalculator(huobi, bian);
+    chajia2 = ChajiaCalculator(bian, huobi);
   }
 
   void _refresh() {
-    chajiaHuobiToBian.refresh(callback: ChajiaRefreshCallback(
-      onFromMarketSymbolGet: (fromSymbols) {
-        setState(() {
-          this.chajiaStateText = "From ${chajiaHuobiToBian.fromMarket.name} symbols: ${fromSymbols.length}";
-        });
-      },
-      onToMarketSymbolGet: (toSymbols) {
-        setState(() {
-          this.chajiaStateText = "To ${chajiaHuobiToBian.toMarket.name} symbols: ${toSymbols.length}";
-        });
-      },
-      onSameSymbolGet: (chajiaItems) {
-        setState(() {
-          this.chajiaStateText = "总共${chajiaItems.length}个相同symbol";
-        });
-      },
-      onDepthGet: (chajia, item) {
-        setState(() {
-          this.chajiaStateText = "${item.fromSymbol.symbol} depth get";
-          this.chajia = chajia;
-        });
-      }
-    )).then((chajia) {
-      setState(() {
-        if (this.chajia == null) {
-          this.chajia = chajia;
-        }
-      });
-    }).catchError((err) {
-      print(err);
-      setStateText(err.toString());
-    });
+    chajia1Controller.refresh()
+        .then((value) => chajia2Controller.refresh());
   }
 
   Widget buildChajiaCalculator(BuildContext context, ChajiaCalculator chajiaCalculator) {
@@ -83,27 +55,15 @@ class _MyHomePageState extends State<MyHomePage> {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text("差价计算，从 ${chajiaCalculator.fromMarket.name} 到 ${chajiaCalculator.toMarket.name}",
-          style: TextStyle(fontSize: 25),),
-        ),
-        Row(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: FittedBox(child: Text(chajiaStateText, style: TextStyle(fontSize: 15, backgroundColor: Colors.grey))),
-            ),
-          ],
-        ),
-        buildChajiaView(context)
+        WidgetChajiaCalculator(chajia1, chajia1Controller),
+        WidgetChajiaCalculator(chajia2, chajia2Controller),
       ],
     );
   }
 
-  Widget buildChajiaView(BuildContext context) {
-    if (this.chajia != null) {
-      return WidgetChajia(this.chajia);
+  Widget buildChajiaView(BuildContext context, Chajia chajia) {
+    if (chajia != null) {
+      return WidgetChajia(chajia);
     } else {
       return Text("没有计算到差价");
     }
@@ -151,7 +111,7 @@ class _MyHomePageState extends State<MyHomePage> {
           Expanded(
             child: ListView(
               children: [
-                buildChajiaCalculator(context, chajiaHuobiToBian),
+                buildChajiaCalculator(context, chajia1),
               ],
             ),
           ),
