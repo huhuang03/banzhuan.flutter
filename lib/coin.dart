@@ -9,6 +9,12 @@ class Coin {
 
   Coin(this.name);
 
+  factory Coin.canWidthDrawAndDeposit(String name) {
+    return Coin(name)
+        ..canDeposit = true
+        ..canWithDraw = true;
+  }
+
   String get fixName {
     return name.toLowerCase();
   }
