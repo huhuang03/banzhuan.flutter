@@ -3,6 +3,7 @@ import 'package:banzhuan/config.dart';
 import 'package:banzhuan/depth.dart';
 import 'package:banzhuan/market/bian/bean_bian.dart';
 import 'package:banzhuan/market/huobi/huobi_symbol.dart';
+import 'package:banzhuan/market/okex/okex_symbol.dart';
 
 class Symbol {
   Coin baseCoin;
@@ -17,6 +18,10 @@ class Symbol {
 
   factory Symbol.fromHuobi(HuobiSymbol huobiSymbol) {
     return Symbol(Coin(huobiSymbol.baseCurrency), Coin(huobiSymbol.quoteCurrency), huobiSymbol.symbol);
+  }
+
+  factory Symbol.fromOkex(OkexSymbol okexSymbol) {
+    return Symbol(Coin(okexSymbol.base_currency), Coin(okexSymbol.quote_currency), okexSymbol.instrument_id);
   }
 
   bool get isBtc {

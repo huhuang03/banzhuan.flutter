@@ -9,5 +9,9 @@ https://api.binance.com/api/v3/exchangeInfo
 
 https://api.huobi.pro/v2/reference/currencies
 
+** okex
+https://www.okex.com/api/spot/v3/instruments
+
+
 * TODOS
 - why some chajia is -0.1?
