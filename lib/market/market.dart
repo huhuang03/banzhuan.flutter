@@ -1,4 +1,5 @@
 import 'package:banzhuan/coin.dart';
+import 'package:banzhuan/config.dart';
 import 'package:banzhuan/depth.dart';
 import 'package:banzhuan/symbol.dart';
 
@@ -8,6 +9,7 @@ abstract class Market {
   String base;
   List<Symbol> symbols = [];
   List<Coin> coins = [];
+  Map<Symbol, Depth> depths = {};
 
   Market(this.name);
 
@@ -33,15 +35,21 @@ abstract class Market {
 
   Future<Depth> refreshDepthInner(Symbol symbol);
 
+  bool hasDepth(Symbol symbol) {
+    var depth = depths.containsKey(symbol)? depths[symbol]: null;
+    return depth != null && (DateTime.now().millisecondsSinceEpoch - depth.setTime) < DEPTH_CACHE_TIME;
+  }
+
   Future<Depth> refreshDepth(Symbol symbol, {bool cache = true}) {
-    if (cache && symbol.isDepthValidate()) {
-      return Future.value(symbol.depth);
+    if (cache && hasDepth(symbol)) {
+      return Future.value(depths[symbol]);
     }
+
     return refreshDepthInner(symbol)
         .then((value) {
-          symbol.setDepth(value);
+          depths[symbol] = value;
           return value;
-        }).catchError((onError) => symbol.setDepth(null));
+        }).catchError((onError) => depths.remove(symbol));
   }
 
   String nickname() {

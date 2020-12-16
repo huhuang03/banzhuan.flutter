@@ -16,6 +16,9 @@ class Depth {
   // 买一
   List<DepthItem> bids;
 
+  // be set
+  int setTime = 0;
+
   Depth(this.asks, this.bids);
 
   DepthCalcResult canBuy({double money}) {

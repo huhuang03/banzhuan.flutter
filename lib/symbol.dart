@@ -9,24 +9,6 @@ class Symbol {
   Coin quoteCoin;
   String symbol;
 
-  int depthSetTime = 0;
-  Depth depth;
-
-  bool isDepthValidate() {
-    return this.depth != null && (DateTime.now().millisecondsSinceEpoch - this.depthSetTime) < DEPTH_CACHE_TIME;
-  }
-
-  bool hasDepth() {
-    return this.depth != null;
-  }
-
-  void setDepth(Depth depth) {
-    this.depth = depth;
-    if (depth != null) {
-      this.depthSetTime = DateTime.now().millisecondsSinceEpoch;
-    }
-  }
-
   Symbol(this.baseCoin, this.quoteCoin, this.symbol); // Symbol(this.baseCoin, this.quoteCoin);
 
   factory Symbol.fromBian(BianSymbol bianSymbol) {
