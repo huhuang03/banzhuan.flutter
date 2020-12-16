@@ -35,13 +35,23 @@ abstract class Market {
 
   Future<Depth> refreshDepthInner(Symbol symbol);
 
-  bool hasDepth(Symbol symbol) {
+  bool hasCleanDepth(Symbol symbol) {
     var depth = depths.containsKey(symbol)? depths[symbol]: null;
     return depth != null && (DateTime.now().millisecondsSinceEpoch - depth.setTime) < DEPTH_CACHE_TIME;
   }
 
+  bool hasDepth(Symbol symbol) {
+    var depth = depths.containsKey(symbol)? depths[symbol]: null;
+    return depth != null;
+  }
+
+  Depth getDepth(Symbol symbol) {
+    var depth = depths.containsKey(symbol)? depths[symbol]: null;
+    return depth;
+  }
+
   Future<Depth> refreshDepth(Symbol symbol, {bool cache = true}) {
-    if (cache && hasDepth(symbol)) {
+    if (cache && hasCleanDepth(symbol)) {
       return Future.value(depths[symbol]);
     }
 

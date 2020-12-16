@@ -72,16 +72,6 @@ class Chajia {
           this.items = items;
           return refreshDepth(items);
         })
-        .then((chajiaSymbols) {
-          for (var chajiaSymbol in chajiaSymbols) {
-            if (chajiaSymbol.hasDepth()) {
-              var buys = chajiaSymbol.fromSymbol.depth.canBuy(money: 1).amount;
-              var sells = chajiaSymbol.toSymbol.depth.canSell(amount: buys);
-              print("sells: ${sells.amount}");
-            }
-          }
-          return null;
-        })
         .then((value) => this);
   }
 }
@@ -110,14 +100,14 @@ class ChajiaItem {
   ChajiaItem(this.fromMarket, this.toMarket, this.fromSymbol, this.toSymbol);
 
   bool hasDepth() {
-    return this.fromSymbol.depth != null && this.toSymbol.depth != null;
+    return this.fromMarket.hasDepth(this.fromSymbol) && this.toMarket.hasDepth(this.toSymbol);
   }
 
   void calcChajia() {
     if (this.hasDepth()) {
       var money = 0.1;
-      buy = fromSymbol.depth.canBuy(money: money);
-      sell = toSymbol.depth.canSell(amount: buy.amount);
+      buy = this.fromMarket.getDepth(this.fromSymbol).canBuy(money: money);
+      sell = this.toMarket.getDepth(this.toSymbol).canSell(amount: buy.amount);
       this.chajia = sell.amount - money;
     }
   }

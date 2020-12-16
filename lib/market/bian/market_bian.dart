@@ -32,8 +32,7 @@ class MarketBian extends Market {
   @override
   Future<Depth> refreshDepthInner(Symbol symbol) {
     return bianApi.depth(symbol.symbol).then((bianDepth) {
-      symbol.depth = Depth.fromDepthNet(bianDepth);
-      return symbol.depth;
+      return Depth.fromDepthNet(bianDepth);
     });
   }
 
