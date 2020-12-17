@@ -6,6 +6,7 @@ import 'package:banzhuan/market/bian/market_bian.dart';
 import 'package:banzhuan/market/huobi/market_huobi.dart';
 import 'package:banzhuan/market/market.dart';
 import 'package:banzhuan/market/okex/market_okex.dart';
+import 'package:banzhuan/market/zb/market_zb.dart';
 import 'package:banzhuan/page/setting/page_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -32,6 +33,8 @@ class _MyHomePageState extends State<MyHomePage> {
   final Market bian = MarketBian();
   final Market huobi = MarketHuobi();
   final Market okex = MarketOkex();
+  final Market zb = MarketZb();
+
   ChajiaCalculator chajia1;
   WidgetChajiaCalculatorController chajia1Controller = WidgetChajiaCalculatorController();
 
@@ -42,8 +45,8 @@ class _MyHomePageState extends State<MyHomePage> {
   Color stateColor;
 
   _MyHomePageState() {
-    chajia1 = ChajiaCalculator(okex, huobi);
-    chajia2 = ChajiaCalculator(huobi, okex);
+    chajia2 = ChajiaCalculator(zb, huobi);
+    chajia1 = ChajiaCalculator(huobi, zb);
   }
 
   void _refresh() {

@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:banzhuan/depth_item.dart';
 import 'package:banzhuan/market/huobi/huobi_depth.dart';
 import 'package:banzhuan/market/market_depth.dart';
+import 'package:banzhuan/market/zb/zb_depth.dart';
 
 class DepthCalcResult {
   double amount = 0;
@@ -65,6 +66,11 @@ class Depth {
   }
 
   factory Depth.fromHuobiDepth(HuobiDepthTick tick) {
+    return Depth(tick.asks.map((e) => DepthItem.fromListDouble(e)).toList(),
+        tick.bids.map((e) => DepthItem.fromListDouble(e)).toList());
+  }
+
+  factory Depth.fromZbDepth(ZbDepth tick) {
     return Depth(tick.asks.map((e) => DepthItem.fromListDouble(e)).toList(),
         tick.bids.map((e) => DepthItem.fromListDouble(e)).toList());
   }
