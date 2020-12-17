@@ -21,7 +21,7 @@ class Symbol {
   }
 
   factory Symbol.fromOkex(OkexSymbol okexSymbol) {
-    return Symbol(Coin(okexSymbol.base_currency), Coin(okexSymbol.quote_currency), okexSymbol.instrument_id);
+    return Symbol(Coin.canWidthDrawAndDeposit(okexSymbol.base_currency), Coin.canWidthDrawAndDeposit(okexSymbol.quote_currency), okexSymbol.instrument_id);
   }
 
   bool get isBtc {

@@ -18,7 +18,13 @@ class OkexApi$thyiImpl extends OkexApi {
   Thyi thyi;
 
   @override
-  Future<OkexDepth> book(String symbol, String size, String depth) {
+  Future<List<OkexSymbol>> instruments() {
+    final apiMethod = ApiMethod('GET', '/api/spot/v3/instruments');
+    return apiMethod.send(thyi).then((d) => List.fromJson(jsonDecode(d)));
+  }
+
+  @override
+  Future<OkexDepth> book(String symbol, {String size, String depth}) {
     final apiMethod = ApiMethod(
         'GET', '/api/spot/v3/instruments/${symbol}/book', queries: {
       "size": size?.toString() ?? '',
