@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:banzhuan/ds/ds_proxy.dart';
 import 'package:banzhuan/market/huobi/api_huobi.dart';
+import 'package:banzhuan/market/okex/api_okex.dart';
 import 'package:banzhuan/page/home/page_home.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/adapter.dart';
@@ -34,6 +35,7 @@ void main() async {
 
   thyiSetProxy(thyiBian);
   thyiSetProxy(thyiHuobi);
+  thyiSetProxy(thyiOkex);
 
   runApp(MyApp());
 }

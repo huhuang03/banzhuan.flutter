@@ -8,6 +8,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'api_okex.dart';
 import 'package:thyi/thyi.dart';
+import 'package:banzhuan/market/okex/okex_symbol.dart';
 import 'package:banzhuan/market/okex/okex_depth.dart';
 
 class OkexApi$thyiImpl extends OkexApi {
@@ -20,7 +21,8 @@ class OkexApi$thyiImpl extends OkexApi {
   @override
   Future<List<OkexSymbol>> instruments() {
     final apiMethod = ApiMethod('GET', '/api/spot/v3/instruments');
-    return apiMethod.send(thyi).then((d) => List.fromJson(jsonDecode(d)));
+    return apiMethod.send(thyi).then((d) =>
+        (jsonDecode(d) as List).map((e) => OkexSymbol.fromJson(e)).toList());
   }
 
   @override

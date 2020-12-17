@@ -15,4 +15,6 @@ abstract class OkexApi {
   {@QUERY('size') String size, @QUERY('depth') String depth});
 }
 
-var okexApi = OkexApi$thyiImpl(Thyi(OKEX_BASE_URL, persisCookie: false));
+var thyiOkex = Thyi(OKEX_BASE_URL, persisCookie: false);
+
+var okexApi = OkexApi$thyiImpl(thyiOkex);

@@ -62,6 +62,19 @@ abstract class Market {
         }).catchError((onError) => depths.remove(symbol));
   }
 
+  void initCoinsBySymbol() {
+    for (var s in this.symbols) {
+      if (!this.coins.contains(s.baseCoin)) {
+        this.coins.add(s.baseCoin
+          ..canDeposit = true
+          ..canWithDraw = true);
+        this.coins.add(s.quoteCoin
+          ..canWithDraw = true
+          ..canDeposit = true);
+      }
+    }
+  }
+
   String nickname() {
     return name;
   }
