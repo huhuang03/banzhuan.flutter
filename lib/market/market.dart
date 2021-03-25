@@ -14,7 +14,8 @@ abstract class Market {
   Market(this.name);
 
   Coin findCoin(Coin coin) {
-    var find = coins.firstWhere((element) => element == coin, orElse: () => null);
+    var find =
+        coins.firstWhere((element) => element == coin, orElse: () => null);
     if (find == null) {
       throw UnsupportedError("在${this.name}里找不到${coin.name}");
     }
@@ -31,22 +32,29 @@ abstract class Market {
     return findCoin(coin)?.canWithDraw ?? false;
   }
 
-  Future<List<Symbol>> refreshSymbols();
+  /// Actual refresh the symbol and colin?
+  /// What is a refresh??
+  /// Do you think it should go here??
+  /// Or some where else? Like a data source?
+  /// Forgive me, let just put it here fow now
+  Future<List<Symbol>> refreshSymbols({force = false});
 
   Future<Depth> refreshDepthInner(Symbol symbol);
 
   bool hasCleanDepth(Symbol symbol) {
-    var depth = depths.containsKey(symbol)? depths[symbol]: null;
-    return depth != null && (DateTime.now().millisecondsSinceEpoch - depth.setTime) < DEPTH_CACHE_TIME;
+    var depth = depths.containsKey(symbol) ? depths[symbol] : null;
+    return depth != null &&
+        (DateTime.now().millisecondsSinceEpoch - depth.setTime) <
+            DEPTH_CACHE_TIME;
   }
 
   bool hasDepth(Symbol symbol) {
-    var depth = depths.containsKey(symbol)? depths[symbol]: null;
+    var depth = depths.containsKey(symbol) ? depths[symbol] : null;
     return depth != null;
   }
 
   Depth getDepth(Symbol symbol) {
-    var depth = depths.containsKey(symbol)? depths[symbol]: null;
+    var depth = depths.containsKey(symbol) ? depths[symbol] : null;
     return depth;
   }
 
@@ -55,11 +63,10 @@ abstract class Market {
       return Future.value(depths[symbol]);
     }
 
-    return refreshDepthInner(symbol)
-        .then((value) {
-          depths[symbol] = value;
-          return value;
-        }).catchError((onError) => depths.remove(symbol));
+    return refreshDepthInner(symbol).then((value) {
+      depths[symbol] = value;
+      return value;
+    }).catchError((onError) => depths.remove(symbol));
   }
 
   void initCoinsBySymbol() {

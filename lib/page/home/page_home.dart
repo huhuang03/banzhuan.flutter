@@ -2,14 +2,14 @@ import 'package:banzhuan/chajia/chajia.dart';
 import 'package:banzhuan/chajia/chajia_calculator.dart';
 import 'package:banzhuan/chajia/widget_chajia.dart';
 import 'package:banzhuan/chajia/widget_chajia_calculator.dart';
-import 'package:banzhuan/market/bian/market_bian.dart';
-import 'package:banzhuan/market/huobi/market_huobi.dart';
-import 'package:banzhuan/market/market.dart';
-import 'package:banzhuan/market/okex/market_okex.dart';
-import 'package:banzhuan/market/zb/market_zb.dart';
+import 'package:banzhuan/manager/chajia/ChajiManager.dart';
+import 'package:banzhuan/manager/chajia/chajia_result.dart';
+import 'package:banzhuan/market/market_manager.dart';
+import 'package:banzhuan/page/home/widget_chajia_result.dart';
 import 'package:banzhuan/page/setting/page_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:th_comm/th_comm.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -30,10 +30,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final Market bian = MarketBian();
-  final Market huobi = MarketHuobi();
-  final Market okex = MarketOkex();
-  final Market zb = MarketZb();
+  final marketMgr = MarketManager();
+  final chajiaManager = new ChajiaManager();
+  ChajiaResult _curChajiaResult;
 
   ChajiaCalculator chajia1;
   WidgetChajiaCalculatorController chajia1Controller = WidgetChajiaCalculatorController();
@@ -45,8 +44,8 @@ class _MyHomePageState extends State<MyHomePage> {
   Color stateColor;
 
   _MyHomePageState() {
-    chajia2 = ChajiaCalculator(okex, bian);
-    chajia1 = ChajiaCalculator(bian, okex);
+    chajia2 = ChajiaCalculator(marketMgr.okex, marketMgr.bian);
+    chajia1 = ChajiaCalculator(marketMgr.bian, marketMgr.okex);
   }
 
   void _refresh() {
@@ -72,15 +71,34 @@ class _MyHomePageState extends State<MyHomePage> {
       return Text("没有计算到差价");
     }
   }
+  
+  Widget _buildEmpty(BuildContext context) {
+    return Container(
+      child: Center(child: Text("数据为空")),
+    );
+  }
+
+  bool _hasChajiaResult() {
+    return this._curChajiaResult != null;
+  }
 
   void setStateText(String text, {bool isError = false}) {
     setState(() {
-      this.stateText = stateText;
+      this.stateText = text;
       if (isError) {
         stateColor = Colors.red;
       } else {
-        stateColor = Colors.green;
+        stateColor = Colors.black;
       }
+    });
+  }
+
+  void clickedMenuRunOnce() {
+    this.setStateText("开始运行一次");
+    chajiaManager.runOnce(ChajiaResultCollector()).then((value) => {
+      this.setStateText("运行完成")
+    }).catchError((e) => {
+      this.setStateText("运行错误", isError: true)
     });
   }
 
@@ -107,17 +125,22 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       appBar: AppBar(
         title: Text(widget.title),
+        // actions not work??
+        actions: [
+          IconButton(icon: Image.asset(imgP("run_once")), onPressed: clickedMenuRunOnce)
+        ],
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Expanded(
-            child: ListView(
-              children: [
-                buildChajiaCalculator(context, chajia1),
-              ],
-            ),
+            child: _hasChajiaResult()? WidgetChajiaResult(): _buildEmpty(context),
+            // child: ListView(
+            //   children: [
+            //     // buildChajiaCalculator(context, chajia1),
+            //   ],
+            // ),
           ),
           Text(
             this.stateText,

@@ -1,4 +1,3 @@
-import 'package:banzhuan/config.dart';
 import 'package:banzhuan/depth.dart';
 import 'package:banzhuan/market/huobi/api_huobi.dart';
 import 'package:banzhuan/market/market.dart';
@@ -7,6 +6,7 @@ import 'package:banzhuan/base/symbol.dart';
 class MarketHuobi extends Market {
   MarketHuobi() : super("huobi");
 
+  /// Where are should I cached the package??
   @override
   Future<List<Symbol>> refreshSymbols() {
     return houbiApi.currencies().then((value) => value.data)
