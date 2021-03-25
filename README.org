@@ -1,3 +1,6 @@
+* Note
+bids 与 base
+
 * LINKS
 [[https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md][bian rest-api]]
 
@@ -14,5 +17,6 @@ https://www.okex.com/api/spot/v3/instruments
 https://www.okex.com/api/spot/v3/instruments/XPO-USDT/book
 
 
+
 * TODOS
-- why some chajia is -0.1?
+- 所有平台定时刷新

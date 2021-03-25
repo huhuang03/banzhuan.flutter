@@ -1,6 +1,4 @@
-import 'package:banzhuan/coin.dart';
-import 'package:banzhuan/config.dart';
-import 'package:banzhuan/depth.dart';
+import 'package:banzhuan/base/coin.dart';
 import 'package:banzhuan/market/bian/bean_bian.dart';
 import 'package:banzhuan/market/huobi/huobi_symbol.dart';
 import 'package:banzhuan/market/okex/okex_symbol.dart';
@@ -8,6 +6,7 @@ import 'package:banzhuan/market/okex/okex_symbol.dart';
 class Symbol {
   Coin baseCoin;
   Coin quoteCoin;
+  // name
   String symbol;
 
   Symbol(this.baseCoin, this.quoteCoin, this.symbol); // Symbol(this.baseCoin, this.quoteCoin);

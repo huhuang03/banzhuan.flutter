@@ -1,7 +1,7 @@
 import 'package:banzhuan/depth.dart';
 import 'package:banzhuan/market/bian/api_bian.dart';
 import 'package:banzhuan/market/market.dart';
-import 'package:banzhuan/symbol.dart';
+import 'package:banzhuan/base/symbol.dart';
 
 class MarketBian extends Market {
   MarketBian() : super("bian");

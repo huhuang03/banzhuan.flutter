@@ -1,13 +1,34 @@
 import 'dart:math';
 
-import 'package:banzhuan/depth_item.dart';
 import 'package:banzhuan/market/huobi/huobi_depth.dart';
 import 'package:banzhuan/market/market_depth.dart';
 import 'package:banzhuan/market/zb/zb_depth.dart';
 
 class DepthCalcResult {
+  /// 如果出现了买不完或者卖不完的情况，finish为false
+  bool finish = false;
   double amount = 0;
   List<DepthItem> items = [];
+}
+
+class DepthItem {
+  double price;
+  double amount;
+
+  DepthItem(this.price, this.amount);
+
+  factory DepthItem.fromList(List<String> list) {
+    return DepthItem(double.parse(list[0]), double.parse(list[1]));
+  }
+
+  factory DepthItem.fromListDouble(List<double> list) {
+    return DepthItem(list[0], list[1]);
+  }
+
+  double sum() {
+    return this.amount * this.price;
+  }
+
 }
 
 class Depth {
@@ -35,9 +56,7 @@ class Depth {
       rst.items.add(DepthItem(ask.price, amount));
     }
 
-    if (money > 0) {
-      throw UnsupportedError("买不完");
-    }
+    rst.finish = money == 0;
     return rst;
   }
 
@@ -54,9 +73,7 @@ class Depth {
       }
     }
 
-    if (amount > 0) {
-      throw UnsupportedError("卖不完");
-    }
+    rst.finish = amount == 0;
     return rst;
   }
 

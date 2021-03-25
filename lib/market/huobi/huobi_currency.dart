@@ -1,4 +1,4 @@
-import 'package:banzhuan/coin.dart';
+import 'file:///E:/source/banzhuan.flutter/lib/base/coin.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'huobi_currency.g.dart';

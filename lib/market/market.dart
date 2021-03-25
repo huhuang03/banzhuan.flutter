@@ -1,7 +1,7 @@
-import 'package:banzhuan/coin.dart';
+import 'package:banzhuan/base/coin.dart';
 import 'package:banzhuan/config.dart';
 import 'package:banzhuan/depth.dart';
-import 'package:banzhuan/symbol.dart';
+import 'package:banzhuan/base/symbol.dart';
 
 abstract class Market {
   // get coins

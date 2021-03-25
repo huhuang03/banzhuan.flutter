@@ -1,7 +1,7 @@
 import 'package:banzhuan/chajia/chajia.dart';
 import 'package:banzhuan/depth.dart';
-import 'package:banzhuan/symbol.dart';
 import 'package:flutter/material.dart';
+import 'package:banzhuan/base/symbol.dart';
 
 class WidgetChajiaItem extends StatefulWidget {
   final ChajiaItem chajia;

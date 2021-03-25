@@ -1,10 +1,10 @@
 import 'dart:convert';
 
-import 'package:banzhuan/coin.dart';
 import 'package:banzhuan/depth.dart';
 import 'package:banzhuan/market/market.dart';
 import 'package:banzhuan/market/zb/api_zb.dart';
-import 'package:banzhuan/symbol.dart';
+import 'package:banzhuan/base/symbol.dart';
+import 'package:banzhuan/base/coin.dart';
 
 class MarketZb extends Market {
   MarketZb() : super("zb");

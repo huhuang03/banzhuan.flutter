@@ -1,7 +1,7 @@
 import 'package:banzhuan/depth.dart';
 import 'package:banzhuan/market/market.dart';
 import 'package:banzhuan/market/okex/api_okex.dart';
-import 'package:banzhuan/symbol.dart';
+import 'package:banzhuan/base/symbol.dart';
 
 class MarketOkex extends Market {
   MarketOkex() : super("Okex");

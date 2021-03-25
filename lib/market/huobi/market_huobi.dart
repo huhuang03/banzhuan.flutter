@@ -2,7 +2,7 @@ import 'package:banzhuan/config.dart';
 import 'package:banzhuan/depth.dart';
 import 'package:banzhuan/market/huobi/api_huobi.dart';
 import 'package:banzhuan/market/market.dart';
-import 'package:banzhuan/symbol.dart';
+import 'package:banzhuan/base/symbol.dart';
 
 class MarketHuobi extends Market {
   MarketHuobi() : super("huobi");
@@ -11,11 +11,9 @@ class MarketHuobi extends Market {
   Future<List<Symbol>> refreshSymbols() {
     return houbiApi.currencies().then((value) => value.data)
         .then((value) => value.map((e) => e.getChains()).toList())
-    // List<List<Chain>>
         .then((value) => value.map((e) => e.map((e) => e.toCoin()).toList()).toList())
         .then((value) => value.expand((element) => element).toList())
-    // List<List<Coin>>
-        .then((value) => this.coins = value..addAll(huobiCurrenciesFix))
+        // .then((value) => this.coins = value..addAll(huobiCurrenciesFix))
         .then((value) => houbiApi.symbols())
         .then((value) => value.data)
         .then((symbols) =>

@@ -45,8 +45,8 @@ class _MyHomePageState extends State<MyHomePage> {
   Color stateColor;
 
   _MyHomePageState() {
-    chajia2 = ChajiaCalculator(zb, huobi);
-    chajia1 = ChajiaCalculator(huobi, zb);
+    chajia2 = ChajiaCalculator(okex, bian);
+    chajia1 = ChajiaCalculator(bian, okex);
   }
 
   void _refresh() {
