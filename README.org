@@ -11,6 +11,7 @@ https://api.huobi.pro/v2/reference/currencies
 
 ** okex
 https://www.okex.com/api/spot/v3/instruments
+https://www.okex.com/api/spot/v3/instruments/XPO-USDT/book
 
 
 * TODOS

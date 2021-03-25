@@ -14,17 +14,7 @@ class MarketBian extends Market {
     .then((value) => value.map((s) => Symbol.fromBian(s)).toList())
     .then((symbols) {
       this.symbols = symbols;
-
-      for (var s in this.symbols) {
-        if (!this.coins.contains(s.baseCoin)) {
-          this.coins.add(s.baseCoin
-            ..canDeposit = true
-            ..canWithDraw = true);
-          this.coins.add(s.quoteCoin
-            ..canWithDraw = true
-            ..canDeposit = true);
-        }
-      }
+      initCoinsBySymbol();
       return symbols;
     });
   }
