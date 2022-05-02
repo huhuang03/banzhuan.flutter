@@ -7,7 +7,7 @@ class MarketBian extends Market {
   MarketBian() : super("bian");
 
   @override
-  Future<List<Symbol>> refreshSymbols() {
+  Future<List<Symbol>> requestSymbols() {
     return bianApi.exchangeInfo()
     .then((value) => value.symbols)
     .then((value) => value.where((element) => element.isTrading()).toList())

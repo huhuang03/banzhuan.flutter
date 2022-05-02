@@ -12,7 +12,7 @@ class MarketOkex extends Market {
   }
 
   @override
-  Future<List<Symbol>> refreshSymbols() {
+  Future<List<Symbol>> requestSymbols() {
     return okexApi.instruments().then((value) {
       return value.map((e) => Symbol.fromOkex(e)).toList();
     }).then((value) {

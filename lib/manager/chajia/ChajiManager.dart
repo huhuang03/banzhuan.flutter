@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:banzhuan/chajia/chajia.dart';
 import 'package:banzhuan/depth.dart';
 import 'package:banzhuan/manager/chajia/ChajiaEngine.dart';
 import 'package:banzhuan/base/symbol.dart';
@@ -57,7 +58,7 @@ class ChajiaManager {
 }
 
 class ChajiaMonitorCallback {
-  //
+  final Function(Market market) onMarketSymbolGet;
   // final Function(List<Symbol>) onFromMarketSymbolGet;
   // final Function(List<Symbol>) onToMarketSymbolGet;
   // final Function(List<ChajiaItem>) onSameSymbolGet;
@@ -65,6 +66,7 @@ class ChajiaMonitorCallback {
   // final Function(List<ChajiaItem>) onAllDepthGet;
   //
   // ChajiaRefreshCallback({this.onFromMarketSymbolGet, this.onToMarketSymbolGet, this.onSameSymbolGet, this.onDepthGet, this.onAllDepthGet});
+  ChajiaMonitorCallback({this.onMarketSymbolGet});
 }
 
 

@@ -2,6 +2,8 @@ import 'package:banzhuan/base/coin.dart';
 import 'package:banzhuan/config.dart';
 import 'package:banzhuan/depth.dart';
 import 'package:banzhuan/base/symbol.dart';
+import 'package:flutter/widgets.dart';
+import 'dart:async';
 
 abstract class Market {
   // get coins
@@ -32,12 +34,18 @@ abstract class Market {
     return findCoin(coin)?.canWithDraw ?? false;
   }
 
+  /// you should refresh
+  Future<List<Symbol>> refreshSymbols({bool force = false}) {
+    // do it!!
+    if (!force && (this.symbols != null && this.symbols.isNotEmpty)) {
+      return Future.value(this.symbols);
+    }
+    return requestSymbols();
+  }
+
   /// Actual refresh the symbol and colin?
-  /// What is a refresh??
-  /// Do you think it should go here??
-  /// Or some where else? Like a data source?
-  /// Forgive me, let just put it here fow now
-  Future<List<Symbol>> refreshSymbols({force = false});
+  @protected
+  Future<List<Symbol>> requestSymbols();
 
   Future<Depth> refreshDepthInner(Symbol symbol);
 

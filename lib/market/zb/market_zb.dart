@@ -15,7 +15,7 @@ class MarketZb extends Market {
   }
 
   @override
-  Future<List<Symbol>> refreshSymbols() {
+  Future<List<Symbol>> requestSymbols({bool force = false}) {
     return apiZb.markets().then((value) => jsonDecode(value) as Map<String, dynamic>).then((value) {
       value.forEach((key, value) {
         var split = key.split("_");

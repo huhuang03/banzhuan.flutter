@@ -8,7 +8,7 @@ class MarketHuobi extends Market {
 
   /// Where are should I cached the package??
   @override
-  Future<List<Symbol>> refreshSymbols() {
+  Future<List<Symbol>> requestSymbols() {
     return houbiApi.currencies().then((value) => value.data)
         .then((value) => value.map((e) => e.getChains()).toList())
         .then((value) => value.map((e) => e.map((e) => e.toCoin()).toList()).toList())

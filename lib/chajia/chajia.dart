@@ -53,12 +53,12 @@ class Chajia {
 
   Future<Chajia> refresh({ChajiaRefreshCallback callback}) {
     this.callback = callback;
-    return fromMarket.refreshSymbols()
+    return fromMarket.requestSymbols()
         .then((value) {
           print('from Market ${fromMarket.name} symbols length: ${fromMarket.symbols.length}');
           print('from market ${fromMarket.name} symbols: ${fromMarket.symbols}');
           callback.onFromMarketSymbolGet(fromMarket.symbols);
-          return toMarket.refreshSymbols();
+          return toMarket.requestSymbols();
         })
         .then((value) {
           print('to Market ${toMarket.name} symbols length: ${toMarket.symbols.length}');
